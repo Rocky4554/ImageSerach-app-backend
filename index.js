@@ -11,10 +11,10 @@ import serverless from 'serverless-http';
 dotenv.config();
 
 // Import routes and passport config
-import authRoutes from '../routes/authRoutes.js';
-import searchRoutes from '../routes/searchRoutes.js';
-import historyRoutes from '../routes/historyRoutes.js';
-import '../config/passport.js';
+import authRoutes from './routes/authRoutes.js';
+import searchRoutes from './routes/searchRoutes.js';
+import historyRoutes from './routes/historyRoutes.js';
+import './config/passport.js';
 
 const app = express();
 
