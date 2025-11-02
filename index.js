@@ -1,20 +1,20 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import session from 'express-session';
-import passport from 'passport';
-import cors from 'cors';
-import MongoStore from 'connect-mongo';
-import dotenv from 'dotenv';
-import serverless from 'serverless-http';
+import express from "express";
+import mongoose from "mongoose";
+import session from "express-session";
+import passport from "passport";
+import cors from "cors";
+import MongoStore from "connect-mongo";
+import dotenv from "dotenv";
+import serverless from "serverless-http";
 
 // Load environment variables
 dotenv.config();
 
 // Import routes and passport config
-import authRoutes from './routes/authRoutes.js';
-import searchRoutes from './routes/searchRoutes.js';
-import historyRoutes from './routes/historyRoutes.js';
-import './config/passport.js';
+import authRoutes from "./routes/authRoutes.js";
+import searchRoutes from "./routes/searchRoutes.js";
+import historyRoutes from "./routes/historyRoutes.js";
+import "./config/passport.js";
 
 const app = express();
 
@@ -38,11 +38,11 @@ connectDB();
 app.use(
   cors({
     origin: [
-      'https://image-serach-app-frontend.vercel.app', 
-      'http://localhost:5173' 
+      "https://image-serach-app-frontend.vercel.app",
+      "http://localhost:5173",
     ],
-    credentials: true, 
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 app.use(express.json());
@@ -50,15 +50,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'fallback-secret-key',
+    secret: process.env.SESSION_SECRET || "fallback-secret-key",
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
+      sameSite: "none", 
+      secure: true, 
     },
   })
 );
@@ -67,23 +67,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api', searchRoutes);
-app.use('/api', historyRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api", searchRoutes);
+app.use("/api", historyRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
 // Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error('Server Error:', err);
-  res.status(500).json({ error: 'Internal Server Error' });
+  console.error("Server Error:", err);
+  res.status(500).json({ error: "Internal Server Error" });
 });
 
 export const handler = serverless(app);
