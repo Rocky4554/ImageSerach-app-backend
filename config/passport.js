@@ -31,7 +31,7 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID || 'dummy-client-id',
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'dummy-secret',
-  callbackURL: 'http://localhost:5000/api/auth/google/callback'
+  callbackURL: 'https://image-serach-app-backend.vercel.app/api/auth/google/callback'
 },
 async (accessToken, refreshToken, profile, done) => {
   try {
@@ -57,7 +57,7 @@ async (accessToken, refreshToken, profile, done) => {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID || 'dummy-app-id',
   clientSecret: process.env.FACEBOOK_APP_SECRET || 'dummy-secret',
-  callbackURL: 'http://localhost:5000/api/auth/facebook/callback',
+  callbackURL: 'https://image-serach-app-backend.vercel.app/api/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'emails', 'photos']
 },
 async (accessToken, refreshToken, profile, done) => {
@@ -84,7 +84,7 @@ async (accessToken, refreshToken, profile, done) => {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID || 'dummy-client-id',
   clientSecret: process.env.GITHUB_CLIENT_SECRET || 'dummy-secret',
-  callbackURL: 'http://localhost:5000/api/auth/github/callback'
+  callbackURL: 'https://image-serach-app-backend.vercel.app/api/auth/github/callback'
 },
 async (accessToken, refreshToken, profile, done) => {
   try {
