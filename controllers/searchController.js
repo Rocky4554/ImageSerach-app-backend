@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Search from '../models/Search.js';
+import Search from '../models/search.js';
 
 export const getTopSearches = async (req, res) => {
   try {
