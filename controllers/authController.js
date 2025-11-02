@@ -1,6 +1,6 @@
 import passport from 'passport';
 
-const CLIENT_URL = process.env.CLIENT_URL || 'https://image-search-app-seven-alpha.vercel.app';
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
 export const googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });
 export const googleCallback = [
