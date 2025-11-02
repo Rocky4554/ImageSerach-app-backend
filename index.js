@@ -67,6 +67,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api', searchRoutes);
 app.use('/api', historyRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
